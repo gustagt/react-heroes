@@ -1,5 +1,7 @@
-body{
+body {
   margin: 0;
   padding: 0;
-  background-image: url("./assets/fundo.jpeg");
+
+  background-image: url("./assets/fundoMain.jpg");
+  background-size: cover;
 }

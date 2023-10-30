@@ -4,14 +4,21 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
+// contexts
 import { HeroesContextProvider } from "./context/HeroesContext";
+import { UserContextProvider } from "./context/UserContext";
+import { HistoricContextProvider } from "./context/HistoricContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <HeroesContextProvider>
-      <App />
-    </HeroesContextProvider>
+    <HistoricContextProvider>
+      <UserContextProvider>
+        <HeroesContextProvider>
+          <App />
+        </HeroesContextProvider>
+      </UserContextProvider>
+    </HistoricContextProvider>
   </React.StrictMode>
 );
 

@@ -1,0 +1,12 @@
+.card{
+    display: flex;
+    justify-content: space-around;
+}
+
+.containerMain{
+    padding: 16px;
+}
+
+.nameTeam{
+    padding: 16px;
+}

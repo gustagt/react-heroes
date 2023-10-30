@@ -1,0 +1,45 @@
+.containerTeam {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  color: #000000;
+}
+
+.listTeam {
+  background-color: rgba(153, 153, 153, 0.89);
+  margin-top: 16px;
+  border-radius: 4px;
+  width: 80%;
+  height: 90%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+    align-items: center;
+}
+
+.containerTeam .select{
+    background-color: #b82929;
+    color: #fff;
+    border: none;
+}
+.containerTeam .outLine{
+    background-color: #23aed8;
+    color: #000;
+    border: none;
+}
+
+.teams{
+    display: flex;
+    margin-top: 16px;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+}
+
+
+.teams img{
+max-width: 40%;
+border-radius: 4%;
+}

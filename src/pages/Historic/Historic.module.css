@@ -1,0 +1,16 @@
+.card{
+    display: flex;
+    background-color: #dadada;
+    width: 70%;
+    margin-top: 20px;
+    text-align: center;
+    flex-direction: column;
+    border-radius: 8px;
+}
+
+.containerTop{
+    display: flex;
+    justify-content: end;
+    margin-top: 40px;
+    margin-right: 80px;
+}

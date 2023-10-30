@@ -1,40 +1,41 @@
+// hooks react
 import { useState, useEffect } from "react";
 
 export function useFetchHeroes() {
+  // state dos dados recebido do fetch
   const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(null);
 
   const [cancelled, setCancelled] = useState(false);
 
   useEffect(() => {
+    // função para carregar os dados
     async function loadData() {
+      // para evitar vazamento de memoria
       if (cancelled) {
         return;
       }
 
-      setLoading(true);
-
       try {
+        // resposta da requisição
         const response = await fetch(
           "http://homologacao3.azapfy.com.br/api/ps/metahumans"
         );
+        // convertendo o json em objeto
         const dataReturn = await response.json();
+        // setando os dados no state
         setData(dataReturn);
       } catch (error) {
+        // feedback em caso de erro
         console.log(error);
-        setError(error.message);
       }
-      setLoading(false);
-      
     }
     loadData();
   }, [cancelled]);
 
+  // para evitar vazamento de memoria
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
-  
-    
-  return { data, loading, error };
+
+  return { data };
 }

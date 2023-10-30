@@ -1,6 +1,7 @@
 .containerMain{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 10px;
 }
 
 .containerCards{
@@ -12,19 +13,15 @@
     gap: 20px;
 }
 
-.avatar{
-    width: 50px;
-    height: 50px;
-}
 
-/* nav bar */
-
-.containerNavbar{
-    display: flex;
-    justify-content: space-around;
-}
 
 /* container team */
+.containerTeam, .containerTeam2{
+    background-color: #00000070;
+    border-radius: 4px;
+    padding: 20px;
+    width: 30%;
+}
 .containerTeam2{
     order: 3;
 }
@@ -37,6 +34,27 @@
 .messageWinner{
     display: block;
     width: 90%;
-    background-color: rgba(165, 42, 42, 0.3);
+    background-color: rgba(247, 247, 247, 0.863);
     text-align: center;
 }
+
+.messageWinner span {
+    font-weight: bold;
+}
+
+.containerBottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+   background-color: rgba(240, 248, 255, 0.541);
+    margin-top: 20px;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+
+}
+ 

@@ -1,10 +1,9 @@
 import { useContext } from "react";
-import { HeroesContext } from "../context/HeroesContext";
+import { HistoricContext } from "../context/HistoricContext";
 
 // hook para facilitar a chamada do contexto
-export const useHeroesContext = () => {
-  const context = useContext(HeroesContext);
-
+export const useHistoricContext = () => {
+  const context = useContext(HistoricContext);
   // caso estiver algo errado com o contexto
   if (!context) {
     console.log("Contexto não encontrado.");

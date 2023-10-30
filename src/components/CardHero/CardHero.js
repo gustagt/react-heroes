@@ -1,16 +1,26 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
-
+// css
 import styles from "./CardHero.module.css"
-import { Link, useNavigate } from 'react-router-dom';
+
+// import mui components
+import {
+  Button,
+  CardActionArea,
+  CardActions,
+  Card,
+  CardContent,
+  CardMedia,
+  Typography,
+} from "@mui/material";
+
+// hooks react
+import { useNavigate } from 'react-router-dom';
+
+// recebe o heroi e o evento que é acionado ao clicar no card
 const CardHero = ({hero, handleClickCard}) => {
 
   const navigate = useNavigate()
 
+  // função que soma os poderes
   function sumPower(powerstats) {
     const sum = powerstats.combat +powerstats.durability +powerstats.intelligence +powerstats.power +powerstats.speed + powerstats.strength;
     return sum
@@ -36,10 +46,9 @@ const CardHero = ({hero, handleClickCard}) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {/* <Button size="small" color="primary" onClick={() =>navigate(`/info/${hero.id}`)}>
+        <Button size="small" color="primary" onClick={() =>navigate(`/info/${hero.id}`)}>
           Detalhes
-        </Button> */}
-        <Link to={`/info/${hero.id}`}>Next</Link>
+        </Button>
       </CardActions>
     </Card>
   );
