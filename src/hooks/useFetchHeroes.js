@@ -26,7 +26,7 @@ export function useFetchHeroes() {
         setError(error.message);
       }
       setLoading(false);
-      console.log(1)
+      
     }
     loadData();
   }, [cancelled]);

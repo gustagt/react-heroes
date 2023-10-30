@@ -6,7 +6,10 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
 import styles from "./CardHero.module.css"
+import { Link, useNavigate } from 'react-router-dom';
 const CardHero = ({hero, handleClickCard}) => {
+
+  const navigate = useNavigate()
 
   function sumPower(powerstats) {
     const sum = powerstats.combat +powerstats.durability +powerstats.intelligence +powerstats.power +powerstats.speed + powerstats.strength;
@@ -33,9 +36,10 @@ const CardHero = ({hero, handleClickCard}) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        {/* <Button size="small" color="primary" onClick={() =>navigate(`/info/${hero.id}`)}>
           Detalhes
-        </Button>
+        </Button> */}
+        <Link to={`/info/${hero.id}`}>Next</Link>
       </CardActions>
     </Card>
   );

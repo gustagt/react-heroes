@@ -1,4 +1,4 @@
-import { useFetchHeroes } from "../hooks/useFetchHeroes";
+import { useFetchHeroes } from "../../hooks/useFetchHeroes";
 import styles from "./Home.module.css";
 
 import Box from '@mui/material/Box';
@@ -7,21 +7,28 @@ import Pagination from '@mui/material/Pagination';
 import Avatar from '@mui/material/Avatar';
 import { deepOrange, deepPurple } from '@mui/material/colors';
 // components
-import CardHero from "../components/CardHero";
+import CardHero from "../../components/CardHero";
 import Typography from '@mui/material/Typography';
 
 
-import { useHeroesContext } from "../hooks/useHeroesContext"
+import { useHeroesContext } from "../../hooks/useHeroesContext"
 import { useEffect } from "react";
 import { Button, Container } from "@mui/material";
 import { useState } from "react";
 
 const Home = () => {
 
-  const { data: heroes, error, loading } = useFetchHeroes();
+  
+  const { data: heroesData} = useFetchHeroes();
+  const { heroes , setHeroes } = useHeroesContext();
+
+  useEffect(() => {
+    setHeroes(heroesData)
+    console.log(heroesData)
+  },[heroes])
 
 
-  // const { heroes, setHeroes } = useHeroesContext();
+
 
   const [team1, setTeam1] = useState([])
   const [team2, setTeam2] = useState([])
@@ -34,7 +41,26 @@ const Home = () => {
 
   const [page, setPage] = useState(1)
 
-// fazer a paginação
+  const [listHeroes, setListHeroes] = useState([])
+  const [search, setSearch] = useState('')
+
+  // fazer a paginação
+
+  useEffect(() => {
+    if(!heroes) return 
+    function subListHeroes(){
+
+      // Calcule o índice de início e fim para a página atual
+      const inicio = (page - 1) * 12;
+      const fim = inicio + 12;
+  
+      // Crie uma sub-lista usando slice() com base no índice de início e fim
+      setListHeroes(heroes.slice(inicio, fim));
+  
+      // Agora você pode mapear a sub-lista
+    }
+    subListHeroes()
+  }, [page, heroes])
 
 
   function handleClickSelectHero(hero) {
@@ -81,7 +107,7 @@ const Home = () => {
     }
   }
 
-  function handleClickReset(){
+  function handleClickReset() {
     setTeam1([])
     setTeam2([])
     setSelectTeam(0)
@@ -89,6 +115,17 @@ const Home = () => {
     setWinner('')
     setSumPowerStatsWinner('')
   }
+
+  function handleChangeSearch(e) {
+    setSearch(e.target.value)
+    const list = heroes.filter(hero => hero.name.includes(search))
+    const inicio = (page - 1) * 12;
+    const fim = inicio + 12;
+
+    // Crie uma sub-lista usando slice() com base no índice de início e fim
+    setListHeroes(list.slice(inicio, fim));
+  }
+ 
 
   useEffect(() => {
     function combat() {
@@ -136,15 +173,15 @@ const Home = () => {
 
     }
     combat()
-  },[team1, team2])
+  }, [team1, team2])
 
-  console.log(team1)
+  console.log(team2)
 
   return (
     <div>
       <div className={styles.containerNavbar}>
         <Avatar className={styles.avatar} sx={{ bgcolor: deepOrange[500] }}>user</Avatar>
-        <input type="search"></input>
+        <input type="search" onChange={handleChangeSearch}></input>
         <Button>Sair</Button>
       </div>
       <div className={styles.containerMain}>
@@ -162,7 +199,7 @@ const Home = () => {
           )}
           <h3>TEAM 1</h3>
           {team1 && team1.map((hero) => (
-            <div className={styles.teams}>
+            <div key={hero.id} className={styles.teams}>
               <img src={hero.images.xs}></img>
               <span>{hero.name}</span>
             </div>
@@ -180,7 +217,7 @@ const Home = () => {
           )}
           <h3>TEAM 2</h3>
           {team2 && team2.map((hero) => (
-            <div className={styles.teams}>
+            <div key={hero.id} className={styles.teams}>
               <span>{hero.name}</span>
               <img src={hero.images.xs}></img>
             </div>
@@ -200,17 +237,20 @@ const Home = () => {
           )}
 
 
-          {/* {heroes && heroes.map((hero) => (
+          {listHeroes && listHeroes.map((hero) => (
 
             <CardHero key={hero.id} hero={hero} handleClickCard={handleClickSelectHero}></CardHero>
 
-          ))} */}
-          
-          <Typography>Page: {page}</Typography>
-           <Pagination count={Math.ceil(heroes.length / 10)} page={page} onChange={(e, value)=> setPage(value)}  color="secondary"/>
+          ))}
+
 
         </div>
       </div>
+          {heroes && (<>
+            <Typography>Page: {page}</Typography>
+            <Pagination count={Math.ceil(heroes.length / 12)} page={page} onChange={(e, value) => setPage(value)} color="secondary" />
+          </>
+          )}
     </div>
   );
 };
